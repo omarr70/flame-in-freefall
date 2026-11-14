@@ -1,4 +1,6 @@
+import json
 import re
+from pathlib import Path
 
 MISSION_PROFILES = {
     "Lunar Habitat (Moon Base)": {
@@ -54,6 +56,34 @@ MISSION_PROFILES = {
         }
     }
 }
+
+def load_powerbi_dashboard_context() -> str:
+    """قراءة هيكل داشبورد Power BI لجعل مساعد الذكاء الاصطناعي متكاملاً مع العرض البصري"""
+    schema_path = Path("Data/processed/fire_dashboard_chatbot_ready.json")
+    if not schema_path.exists():
+        return "Power BI Dashboard Schema not found."
+    
+    try:
+        with open(schema_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        
+        pages = [p.get("display_name") for p in data.get("dashboard_schema", {}).get("pages", [])]
+        tables = [t.get("name") for t in data.get("dashboard_schema", {}).get("table_field_catalog", [])]
+        visuals = [
+            v.get("visible_title_from_definition") or v.get("visual_type")
+            for v in data.get("dashboard_schema", {}).get("visual_index", [])
+        ]
+        
+        return (
+            f"--- POWER BI DASHBOARD METADATA CONTEXT ---\n"
+            f"Dashboard Name: FLAME IN FREEFALL\n"
+            f"Pages Available: {pages}\n"
+            f"Core Data Tables: {tables}\n"
+            f"Key Visual Components: {visuals[:10]} ... (total {len(visuals)} visuals)\n"
+            f"Instruction: When users ask about metrics, reference these exact table columns (e.g., G1_Experiment.IonCurrent, EfieldVoltage, MFCA3FuelFlow, TCA, TCB) and dashboard sections."
+        )
+    except Exception as e:
+        return f"Error loading dashboard metadata: {str(e)}"
 
 def check_scope_guardrails(query: str) -> list[str]:
     warnings = []
@@ -119,3 +149,32 @@ def rank_studies_for_mission(mission_name: str, studies_list: list, custom_query
 
     ranked.sort(key=lambda x: x["score"], reverse=True)
     return ranked[:top_k]
+import json
+from pathlib import Path
+
+def load_powerbi_dashboard_context() -> str:
+    schema_path = Path("Data/processed/fire_dashboard_chatbot_ready.json")
+    if not schema_path.exists():
+        return "Power BI Dashboard Schema not found."
+    
+    try:
+        with open(schema_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        
+        pages = [p.get("display_name") for p in data.get("dashboard_schema", {}).get("pages", [])]
+        tables = [t.get("name") for t in data.get("dashboard_schema", {}).get("table_field_catalog", [])]
+        visuals = [
+            v.get("visible_title_from_definition") or v.get("visual_type")
+            for v in data.get("dashboard_schema", {}).get("visual_index", [])
+        ]
+        
+        return (
+            f"--- POWER BI DASHBOARD METADATA CONTEXT ---\n"
+            f"Dashboard Name: FLAME IN FREEFALL\n"
+            f"Pages Available: {pages}\n"
+            f"Core Data Tables: {tables}\n"
+            f"Key Visual Components: {visuals[:10]} ... (total {len(visuals)} visuals)\n"
+            f"Instruction: When users ask about metrics, reference these exact table columns (e.g., G1_Experiment.IonCurrent, EfieldVoltage, MFCA3FuelFlow, TCA, TCB) and dashboard sections."
+        )
+    except Exception as e:
+        return f"Error loading dashboard metadata: {str(e)}"

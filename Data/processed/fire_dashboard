@@ -1,0 +1,29 @@
+{
+  "dashboard_title": "Flame in Freefall — Power BI Research & Telemetry Dashboard",
+  "pages": [
+    {
+      "name": "01 - Research Overview",
+      "visuals": [
+        "Total Investigations & Publications KPIs",
+        "Investigations by Flight Platform (ISS, Parabolic Flight, Drop Tower)",
+        "Investigations by Research Area & Project Type",
+        "Study & Publication Breakdown Table"
+      ]
+    },
+    {
+      "name": "Page 1 (ACME / G1-K1 Telemetry)",
+      "visuals": [
+        "ELECTRIC FIELD SIGNAL TREND (EfieldVoltage vs Time_Seconds)",
+        "FUEL FLOW vs ION CURRENT RESPONSE (MFCA3FuelFlow vs IonCurrent)",
+        "Burner & Thermocouple Thermal Profile (TCA, TCB, TCBurner, TCC, Ch21)",
+        "Setpoint Control Matrix (MFCA1Setpoint(V), MFCA3Setpoint(V))"
+      ]
+    }
+  ],
+  "data_model_tables": {
+    "G1_Experiment": ["Reading_ID", "Time_Seconds", "IonCurrent", "EfieldVoltage", "MFCA3FuelFlow", "TCA", "TCB", "TCBurner", "TCC", "Ch21"],
+    "K1_Setpoints": ["Setpoint_ID", "MFCA1Setpoint(V)", "MFCA3Setpoint(V)"],
+    "Publications": ["Publication_Title", "Study_Title", "Flight_Platform", "Project_Type", "Research_Area"],
+    "Studies": ["Study_Title", "Flight_Platform", "Project_Type", "Research_Area"]
+  }
+}
