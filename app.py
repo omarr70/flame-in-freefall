@@ -308,7 +308,7 @@ st.markdown(f"""
     /* ================= MOBILE RESPONSIVE FIXES ================= */
     @media (max-width: 768px) {{
         .block-container {{
-            padding-top: 1.2rem !important;
+            padding-top: 3.2rem !important;
             padding-left: 0.85rem !important;
             padding-right: 0.85rem !important;
         }}
@@ -322,8 +322,8 @@ st.markdown(f"""
             min-width: 100% !important;
         }}
         .app-header {{
-            font-size: 1.2rem !important;
-            margin-bottom: 4px !important;
+            font-size: 1.25rem !important;
+            margin-bottom: 6px !important;
         }}
         .kpi-card {{
             padding: 12px 14px !important;
