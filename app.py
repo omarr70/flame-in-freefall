@@ -304,6 +304,38 @@ st.markdown(f"""
     .status-dot.filtered {{
         background-color: {theme["accent_highlight"]};
     }}
+
+    /* ================= MOBILE RESPONSIVE FIXES ================= */
+    @media (max-width: 768px) {{
+        .block-container {{
+            padding-top: 1.2rem !important;
+            padding-left: 0.85rem !important;
+            padding-right: 0.85rem !important;
+        }}
+        [data-testid="stHorizontalBlock"] {{
+            flex-wrap: wrap !important;
+            gap: 0.65rem !important;
+        }}
+        [data-testid="stHorizontalBlock"] > [data-testid="column"] {{
+            width: 100% !important;
+            flex: 1 1 100% !important;
+            min-width: 100% !important;
+        }}
+        .app-header {{
+            font-size: 1.2rem !important;
+            margin-bottom: 4px !important;
+        }}
+        .kpi-card {{
+            padding: 12px 14px !important;
+        }}
+        .kpi-val {{
+            font-size: 1.35rem !important;
+        }}
+        code {{
+            word-break: break-all !important;
+            white-space: normal !important;
+        }}
+    }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -468,9 +500,9 @@ Active Dashboard Selection: {focus_study or st.session_state.selected_domain or 
 
 CRITICAL GROUNDING RULES:
 1. Distinguish between:
-   - **Completely Out-of-Scope Topics** (e.g., commercial airplanes like Boeing 777, cooking/food, sports, general coding, or non-space topics): Reply ONLY with:
+  - **Completely Out-of-Scope Topics** (e.g., commercial airplanes like Boeing 777, cooking/food, sports, general coding, or non-space topics): Reply ONLY with:
      "**Out of Dataset Scope:** The requested information is not available in the NASA PSI spacecraft fire-safety records."
-   - **Spacecraft & Exploration Mission Queries** (e.g., Lunar Habitat, Mars Transit, ISS, Rover, microgravity combustion, material flammability, suppression, detection, or partial-gravity risks): ALWAYS answer by synthesizing the retrieved NASA PSI records (`[PSI-99]`, `[PSI-25]`, etc.) as baseline microgravity/1g evidence, citing exact Study IDs and DOIs, and explicitly noting where direct 1/6g or 3/8g partial-gravity data is absent in PSI.
+- **Spacecraft & Exploration Mission Queries** (e.g., Lunar Habitat, Mars Transit, ISS, Rover, microgravity combustion, material flammability, suppression, detection, or partial-gravity risks): ALWAYS answer by synthesizing the retrieved NASA PSI records (`[PSI-99]`, `[PSI-25]`, etc.) as baseline microgravity/1g evidence, citing exact Study IDs and DOIs, and explicitly noting where direct 1/6g or 3/8g partial-gravity data is absent in PSI.
 2. Never invent numerical measurements not present in the context. Keep answers concise (under 250 words) with bullet points and a complete References list. Never use emojis, <br> tags, or <think> tags.
 3. Language Rule: Always respond in the exact same language as the user's question (Arabic if asked in Arabic, English if asked in English), while keeping Study IDs like [PSI-99] and DOIs in English."""
 
@@ -671,7 +703,7 @@ with left_dash:
             plot_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Inter, sans-serif", size=12, color=theme["text_main"]),
             xaxis=dict(
-                tickangle=0,
+                tickangle=-25,
                 tickfont=dict(size=11, color=theme["axis_color"]),
                 title_font=dict(size=12, color=theme["axis_color"]),
                 gridcolor=theme["grid_color"]
@@ -757,7 +789,7 @@ with left_dash:
             plot_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Inter, sans-serif", size=12, color=theme["text_main"]),
             xaxis=dict(
-                tickangle=0,
+                tickangle=-25,
                 tickfont=dict(size=11, color=theme["axis_color"]),
                 title_font=dict(size=12, color=theme["axis_color"]),
                 gridcolor=theme["grid_color"]
